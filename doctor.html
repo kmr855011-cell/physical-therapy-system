@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="doctor/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <title>doctor Dashboard</title>
+</head>
+
+<body>
+
+
+    <main class="dashboard doctor-dashboard">
+        <section class="dashboard-content">
+            <header class="topbar">
+
+
+                <div class="topbar-left">
+                    <h1> المرضى</h1>
+                </div>
+
+                <div class="topbar-right">
+                    <div class="notifications">
+
+                        <button class="notification-btn">
+
+                            <i class="bi bi-bell"></i>
+
+                            <span class="notification-badge">3</span>
+
+                        </button>
+
+                        <div class="notification-dropdown">
+
+                            <h4>الإشعارات</h4>
+
+                            <div class="notification-item">
+
+                                <i class="bi bi-person-plus-fill"></i>
+
+                                <div>
+
+                                    <strong>تم إضافة مريض جديد</strong>
+
+                                    <small>منذ 5 دقائق</small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="notification-item">
+
+                                <i class="bi bi-calendar-check"></i>
+
+                                <div>
+
+                                    <strong>جلسة محمد أحمد بدأت</strong>
+
+                                    <small>منذ 15 دقيقة</small>
+
+                                </div>
+
+                            </div>
+
+                            <div class="notification-item">
+
+                                <i class="bi bi-pencil-square"></i>
+
+                                <div>
+
+                                    <strong>تم تعديل ملف مريض</strong>
+
+                                    <small>منذ ساعة</small>
+
+                                </div>
+
+                            </div>
+
+                            <button class="show-all-btn">
+
+                                عرض كل الإشعارات
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile">
+
+                        <button class="profile-btn">
+
+                            <i class="bi bi-person-circle"></i>
+
+                            <span>د. أحمد</span>
+
+                        </button>
+
+                        <div class="profile-dropdown">
+
+                            <div class="profile-info">
+
+                                <i class="bi bi-person-circle"></i>
+
+                                <div>
+
+                                    <h4>د. أحمد</h4>
+
+                                    <span>doctor</span>
+
+                                </div>
+
+                            </div>
+
+                            <hr>
+
+                            <button class="dropdown-item">
+
+                                <i class="bi bi-person"></i>
+
+                                الملف الشخصي
+
+                            </button>
+
+                            <button class="dropdown-item">
+
+                                <i class="bi bi-gear"></i>
+
+                                الإعدادات
+
+                            </button>
+
+                            <button class="dropdown-item logout-item">
+
+                                <i class="bi bi-box-arrow-right"></i>
+
+                               <a href="index.html" style="text-decoration: none;">تسجيل الخروج </a>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </header>
+            <section class="content-card quick-search">
+
+                <div class="quick-search-header">
+
+                    <h2>البحث عن المرضى</h2>
+
+
+                </div>
+
+                <div class="search-wrapper">
+
+                    <i class="bi bi-search"></i>
+
+                    <input type="search" id="patient-search" placeholder="ابحث عن مريض...">
+                </div>
+
+            </section>
+
+            <section class="content-card">
+
+                <div class="section-header">
+
+                    <h2>
+
+                        <i class="bi bi-people-fill"></i>
+
+                        جميع المرضى
+
+                    </h2>
+
+                    <span id="patients-count"></span>
+
+                </div>
+
+                <div class="table-responsive">
+
+                    <table class="dashboard-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>الاسم</th>
+
+                                <th>التشخيص</th>
+
+                                <th>الهاتف</th>
+
+                                <th>الحالة</th>
+
+                                <th>الإجراء</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="patients-table-body">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+
+
+        </section>
+
+        </section>
+
+
+
+    </main>
+
+
+
+    <script src="doctor/doctor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

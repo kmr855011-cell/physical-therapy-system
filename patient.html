@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>patient-page</title>
+
+
+    <link rel="stylesheet" href="/patient/style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+   <main class="patient-page">
+
+    <section class="patient-container">
+
+        <!-- ================= Topbar ================= -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="secondary-btn back-btn">
+
+                    <i class="bi bi-arrow-right"></i>
+
+                  <a href="doctor.html" style="text-decoration: none;"> رجوع </a>
+
+                </button>
+
+                <h1>
+
+                    ملف المريض
+
+                </h1>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <button class="secondary-btn print-btn">
+
+                    <i class="bi bi-printer"></i>
+
+                    طباعة
+
+                </button>
+
+                <a class="primary-btn" href="patient-edit.html">
+
+                    <i class="bi bi-pencil-square"></i>
+
+                    تعديل
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================= Patient Header ================= -->
+
+        <section class="content-card patient-header">
+
+            <div class="patient-avatar">
+
+                <i class="bi bi-person-circle"></i>
+
+            </div>
+
+            <div class="patient-header-content">
+
+                <div class="patient-title">
+
+                    <h2 id="patient-name">
+
+                       اسم المريض
+
+                    </h2>
+
+                    <span class="status active">
+
+                        نشط
+
+                    </span>
+
+                </div>
+
+                <p class="patient-diagnosis">
+
+                 الاصابة
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= Patient Information ================= -->
+
+        <section class="content-card">
+
+            <div class="section-header">
+
+                <h2>
+
+                    بيانات المريض
+
+                </h2>
+
+            </div>
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+
+                        رقم الملف
+
+                    </span>
+
+                    <strong id="patient-id">
+
+                        #1001
+
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>
+
+                        العمر
+
+                    </span>
+
+                    <strong id="patient-age">
+
+                       السن 
+
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>
+
+                        رقم الهاتف
+
+                    </span>
+
+                    <strong id="patient-phone">
+
+                       --------------
+
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>
+
+                        الطبيب
+
+                    </span>
+
+                    <strong id="patient-doctor">
+
+                       -------------
+
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>
+
+                        تاريخ البداية
+
+                    </span>
+
+                    <strong id="patient-start">
+
+                        ------------
+
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>
+
+                        آخر زيارة
+
+                    </span>
+
+                    <strong id="patient-last">
+
+                        ------------
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= Summary ================= -->
+
+        <section class="patient-summary">
+
+            <article class="summary-card">
+
+                <div class="summary-icon">
+
+                    <i class="bi bi-calendar-check"></i>
+
+                </div>
+
+                <div class="summary-content">
+
+                    <span>
+
+                        إجمالي الجلسات
+
+                    </span>
+
+                    <strong id="total-sessions">
+
+                        --
+
+                    </strong>
+
+                </div>
+
+            </article>
+
+            <article class="summary-card">
+
+                <div class="summary-icon">
+
+                    <i class="bi bi-check-circle"></i>
+
+                </div>
+
+                <div class="summary-content">
+
+                    <span>
+
+                        الجلسات المنتهية
+
+                    </span>
+
+                    <strong id="finished-sessions">
+
+                        --
+
+                    </strong>
+
+                </div>
+
+            </article>
+
+            <article class="summary-card">
+
+                <div class="summary-icon">
+
+                    <i class="bi bi-hourglass-split"></i>
+
+                </div>
+
+                <div class="summary-content">
+
+                    <span>
+
+                        الجلسات المتبقية
+
+                    </span>
+
+                    <strong id="remaining-sessions">
+
+                        --
+
+                    </strong>
+
+                </div>
+
+            </article>
+
+            <article class="summary-card">
+
+                <div class="summary-icon">
+
+                    <i class="bi bi-calendar-event"></i>
+
+                </div>
+
+                <div class="summary-content">
+
+                    <span>
+
+                        الموعد القادم
+
+                    </span>
+
+                    <strong id="next-session">
+
+                       ----------------
+
+                    </strong>
+
+                </div>
+
+            </article>
+
+        </section>
+                <!-- ================= Patient Tabs ================= -->
+
+        <nav class="patient-tabs">
+
+            <button
+                class="tab-btn active"
+                data-tab="diagnosis">
+
+                التشخيص
+
+            </button>
+
+            <button
+                class="tab-btn"
+                data-tab="treatment">
+
+                الخطة العلاجية
+
+            </button>
+
+            <button
+                class="tab-btn"
+                data-tab="sessions">
+
+                الجلسات
+
+            </button>
+
+            <button
+                class="tab-btn"
+                data-tab="exercises">
+
+                التمارين
+
+            </button>
+
+            <button
+                class="tab-btn"
+                data-tab="devices">
+
+                الأجهزة
+
+            </button>
+
+            <button
+                class="tab-btn"
+                data-tab="attachments">
+
+                المرفقات
+
+            </button>
+
+            <button
+                class="tab-btn"
+                data-tab="notes">
+
+                الملاحظات
+
+            </button>
+
+        </nav>
+
+
+
+        <!-- ================= Diagnosis ================= -->
+
+        <section
+            class="content-card tab-content active-tab"
+            id="diagnosis">
+
+            <div class="section-header">
+
+                <h2>
+
+                    التشخيص
+
+                </h2>
+
+            </div>
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+
+                        التشخيص
+
+                    </span>
+
+                    <strong>
+
+                      ---------------
+
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>
+
+                        الشكوى الرئيسية
+
+                    </span>
+
+                    <strong>
+
+                       -----------
+
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>
+
+                        تاريخ الإصابة
+
+                    </span>
+
+                    <strong>
+
+                      -------------
+
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>
+
+                        شدة الألم
+
+                    </span>
+
+                    <strong>
+
+                      --------------
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="text-card">
+
+                <h3>
+
+                    ملاحظات الطبيب
+
+                </h3>
+
+                <p>
+----------------------------------------
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= Treatment ================= -->
+
+        <section
+            class="content-card tab-content"
+            id="treatment">
+
+            <div class="section-header">
+
+                <h2>
+
+                    الخطة العلاجية
+
+                </h2>
+
+            </div>
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>
+
+                        نوع العلاج
+
+                    </span>
+
+                    <strong>
+
+                      -----------
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>
+
+                        عدد الجلسات
+
+                    </span>
+
+                    <strong>
+
+                       --------
+
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>
+
+                        مدة الجلسة
+
+                    </span>
+
+                    <strong>
+
+                      -------
+
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>
+
+                        عدد الجلسات بالأسبوع
+
+                    </span>
+
+                    <strong>
+
+                       --------
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="text-card">
+
+                <h3>
+
+                    أهداف العلاج
+
+                </h3>
+
+                <ul class="treatment-list">
+
+                    <li>
+
+                        -------- .
+
+                    </li>
+
+                    <li>
+
+                        --------
+
+                    </li>
+
+                    <li>
+
+                        -------- 
+
+                    </li>
+
+                    <li>
+
+                        --------.
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+                <!-- ================= Sessions ================= -->
+
+        <section
+            class="content-card tab-content"
+            id="sessions">
+
+            <div class="section-header">
+
+                <h2>
+
+                    سجل الجلسات
+
+                </h2>
+
+                <button class="primary-btn add-session-btn">
+
+                    <i class="bi bi-plus-circle"></i>
+
+                    إضافة جلسة
+
+                </button>
+
+            </div>
+
+            <div class="table-wrapper">
+
+                <table class="dashboard-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>التاريخ</th>
+
+                            <th>الدكتور</th>
+
+                            <th>الحالة</th>
+
+                            <th>الملاحظات</th>
+
+                            <th>الإجراء</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="sessions-history-body">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= Exercises ================= -->
+
+        <section
+            class="content-card tab-content"
+            id="exercises">
+
+            <div class="section-header">
+
+                <h2>
+
+                    التمارين العلاجية
+
+                </h2>
+
+            </div>
+
+            <div
+                class="cards-grid"
+                id="exercise-grid">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= Devices ================= -->
+
+        <section
+            class="content-card tab-content"
+            id="devices">
+
+            <div class="section-header">
+
+                <h2>
+
+                    الأجهزة المستخدمة
+
+                </h2>
+
+            </div>
+
+            <div
+                class="cards-grid"
+                id="devices-grid">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= Attachments ================= -->
+
+        <section
+            class="content-card tab-content"
+            id="attachments">
+
+            <div class="section-header">
+
+                <h2>
+
+                    المرفقات
+
+                </h2>
+
+                <button class="primary-btn attach-file-btn">
+
+                    <i class="bi bi-paperclip"></i>
+
+                    إرفاق ملف
+
+                </button>
+
+                <input type="file" id="attachment-input" class="hidden" multiple>
+
+            </div>
+
+            <div
+                class="cards-grid"
+                id="attachments-grid">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= Notes ================= -->
+
+        <section
+            class="content-card tab-content"
+            id="notes">
+
+            <div class="section-header">
+
+                <h2>
+
+                    ملاحظات الطبيب
+
+                </h2>
+
+                <span class="notes-last-update" id="notes-last-update"></span>
+
+            </div>
+
+            <textarea
+                class="doctor-notes"
+                id="doctor-notes"
+                rows="8"
+                placeholder="اكتب ملاحظات الطبيب هنا...">
+
+            </textarea>
+
+            <div class="notes-actions">
+
+                <button class="primary-btn save-notes-btn">
+
+                    <i class="bi bi-floppy"></i>
+
+                    حفظ الملاحظات
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= Footer Actions ================= -->
+
+        <section class="content-card">
+
+            <div class="patient-actions">
+
+                <button class="primary-btn save-btn">
+
+                    <i class="bi bi-floppy"></i>
+
+                    حفظ
+
+                </button>
+
+                <button class="secondary-btn print-btn">
+
+                    <i class="bi bi-printer"></i>
+
+                    طباعة
+
+                </button>
+
+                <button class="secondary-btn share-btn">
+
+                    <i class="bi bi-share"></i>
+
+                    مشاركة
+
+                </button>
+
+            </div>
+
+        </section>
+    </section>
+   </main>
+
+    <!-- ================= Add Session Modal ================= -->
+
+    <div class="app-modal" id="session-modal">
+
+        <div class="app-modal-box">
+
+            <h2>إضافة جلسة جديدة</h2>
+
+            <p>
+                أدخل بيانات الجلسة لإضافتها لسجل المريض.
+            </p>
+
+            <form class="add-session-form">
+
+                <div class="input-group">
+
+                    <label for="session-date">تاريخ الجلسة</label>
+
+                    <div class="input-wrapper">
+
+                        <i class="bi bi-calendar-event"></i>
+
+                        <input type="text" id="session-date" placeholder="مثال: 12 / 07 / 2026">
+
+                    </div>
+
+                    <small class="error-message" id="session-date-error"></small>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="session-status">حالة الجلسة</label>
+
+                    <div class="input-wrapper">
+
+                        <i class="bi bi-flag"></i>
+
+                        <select id="session-status">
+
+                            <option value="قيد الانتظار">قيد الانتظار</option>
+
+                            <option value="منتهي">منتهي</option>
+
+                            <option value="ملغي">ملغي</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="session-notes">ملاحظات</label>
+
+                    <div class="input-wrapper">
+
+                        <i class="bi bi-journal-text"></i>
+
+                        <input type="text" id="session-notes" placeholder="ملاحظات الجلسة (اختياري)">
+
+                    </div>
+
+                </div>
+
+                <div class="app-modal-actions">
+
+                    <button type="submit" class="primary-btn">
+
+                        إضافة الجلسة
+
+                    </button>
+
+                    <button type="button" class="secondary-btn close-session-modal">
+
+                        إلغاء
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- ================= Toast Container ================= -->
+
+    <div class="toast-container" id="toast-container"></div>
+                <script src="/patient/main.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
