@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* =========================================================
    ROOT VARIABLES
 ========================================================= */
@@ -183,7 +185,7 @@ html {
 
 body {
 
-    font-family: "Segoe UI", sans-serif;
+     font-family: 'Cairo', sans-serif;
 
     background: var(--color-background);
 
