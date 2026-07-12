@@ -63,7 +63,25 @@ const patients = [
 
 
 
+function getStatusClass(status) {
 
+    switch (status) {
+
+        case "نشط":
+            return "active";
+
+        case "معلق":
+            return "pending";
+
+        case "منتهي":
+            return "inactive";
+
+        default:
+            return "";
+
+    }
+
+}
 
 
 
@@ -89,9 +107,9 @@ function renderPatientsTable(data = patients) {
 
             <td>
 
-                <span class="status">
+                <span class="status ${getStatusClass(patient.status)}">
 
-                    ${patient.status}
+                     ${patient.status}
 
                 </span>
 
@@ -102,7 +120,7 @@ function renderPatientsTable(data = patients) {
                 <button
                     class="primary-btn open-patient-btn"
                     data-id="${patient.id}">
-
+                    <i class="bi bi-folder2-open"></i>
                     فتح الملف
 
                 </button>
