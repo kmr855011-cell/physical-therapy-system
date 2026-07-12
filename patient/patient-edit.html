@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز الطارق | تعديل بيانات المريض</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <main class="patient-page">
+
+        <section class="patient-container">
+
+            <!-- ================= Topbar ================= -->
+
+            <header class="topbar">
+
+                <div class="topbar-left">
+
+                    <a class="secondary-btn back-btn" href="patient.html">
+
+                        <i class="bi bi-arrow-right"></i>
+
+                        رجوع
+
+                    </a>
+
+                    <h1>
+
+                        تعديل بيانات المريض
+
+                    </h1>
+
+                </div>
+
+            </header>
+
+            <!-- ================= Patient Context ================= -->
+
+            <section class="content-card patient-header" id="edit-context-header">
+
+                <div class="patient-avatar">
+
+                    <i class="bi bi-person-circle"></i>
+
+                </div>
+
+                <div class="patient-header-content">
+
+                    <div class="patient-title">
+
+                        <h2 id="edit-context-name">
+
+                            محمد أحمد
+
+                        </h2>
+
+                        <span class="status active" id="edit-context-status">
+
+                            نشط
+
+                        </span>
+
+                    </div>
+
+                    <p class="patient-diagnosis">
+
+                        رقم الملف #1001 — يتم تعديل بيانات هذا المريض
+
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- ================= Edit Form ================= -->
+
+            <section class="content-card">
+
+                <div class="section-header">
+
+                    <h2>
+
+                        <i class="bi bi-person-lines-fill"></i>
+
+                        البيانات الأساسية
+
+                    </h2>
+
+                </div>
+
+                <form class="edit-patient-form" id="edit-patient-form">
+
+                    <div class="details-grid">
+
+                        <div class="input-group">
+
+                            <label for="edit-name">اسم المريض</label>
+
+                            <div class="input-wrapper">
+
+                                <i class="bi bi-person"></i>
+
+                                <input type="text" id="edit-name" placeholder="اسم المريض">
+
+                            </div>
+
+                            <small class="error-message" id="edit-name-error"></small>
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label for="edit-age">العمر</label>
+
+                            <div class="input-wrapper">
+
+                                <i class="bi bi-calendar3"></i>
+
+                                <input type="number" id="edit-age" placeholder="العمر" min="0">
+
+                            </div>
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label for="edit-phone">رقم الهاتف</label>
+
+                            <div class="input-wrapper">
+
+                                <i class="bi bi-telephone"></i>
+
+                                <input type="tel" id="edit-phone" placeholder="01xxxxxxxxx">
+
+                            </div>
+
+                            <small class="error-message" id="edit-phone-error"></small>
+
+                        </div>
+
+                        <div class="input-group">
+
+                            <label for="edit-doctor">الطبيب المعالج</label>
+
+                            <div class="input-wrapper">
+
+                                <i class="bi bi-person-badge"></i>
+
+                                <input type="text" id="edit-doctor" placeholder="اسم الطبيب">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+            <section class="content-card">
+
+                <div class="section-header">
+
+                    <h2>
+
+                        <i class="bi bi-clipboard2-pulse"></i>
+
+                        بيانات التشخيص
+
+                    </h2>
+
+                </div>
+
+                <div class="details-grid">
+
+                    <div class="input-group">
+
+                        <label for="edit-diagnosis">التشخيص</label>
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-clipboard2-pulse"></i>
+
+                            <input type="text" id="edit-diagnosis" placeholder="التشخيص" form="edit-patient-form">
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label for="edit-complaint">الشكوى الرئيسية</label>
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-exclamation-circle"></i>
+
+                            <input type="text" id="edit-complaint" placeholder="الشكوى الرئيسية" form="edit-patient-form">
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label for="edit-severity">شدة الألم</label>
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-thermometer-half"></i>
+
+                            <select id="edit-severity" form="edit-patient-form">
+
+                                <option value="خفيفة">خفيفة</option>
+
+                                <option value="متوسطة">متوسطة</option>
+
+                                <option value="شديدة">شديدة</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label for="edit-status">حالة المريض</label>
+
+                        <div class="input-wrapper">
+
+                            <i class="bi bi-flag"></i>
+
+                            <select id="edit-status" form="edit-patient-form">
+
+                                <option value="نشط">نشط</option>
+
+                                <option value="معلق">معلق</option>
+
+                                <option value="منتهي">منتهي</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- ================= Footer Actions ================= -->
+
+            <section class="content-card">
+
+                <div class="patient-actions">
+
+                    <button class="primary-btn" type="submit" form="edit-patient-form">
+
+                        <i class="bi bi-check-circle"></i>
+
+                        حفظ التعديلات
+
+                    </button>
+
+                    <a class="secondary-btn" href="patient.html">
+
+                        إلغاء
+
+                    </a>
+
+                </div>
+
+            </section>
+
+        </section>
+    </main>
+
+    <!-- ================= Toast Container ================= -->
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="patient-edit.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
