@@ -612,7 +612,6 @@ addSecretaryForm?.addEventListener("submit", function (event) {
                     LOGOUT - DROPDOWN 
 ========================================================== */
 
-const logoutBtn = document.querySelector(".logout-btn");
 const logoutDropdownBtn = document.querySelector(".logout-item");
 
 logoutBtn?.addEventListener("click", function () {
