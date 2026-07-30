@@ -134,7 +134,7 @@ function bindPatientButtons() {
 
             localStorage.setItem("currentPatientId", patientId);
 
-            window.location.href = "../patient.html";
+            window.location.href = "patient.html";
 
         });
 
