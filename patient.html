@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>patient-page</title>
+    <title>مركز الطارق | ملف المريض</title>
 
 
     <link rel="stylesheet" href="patient/style.css">
@@ -29,7 +29,7 @@
 
                         <i class="bi bi-arrow-right"></i>
 
-                        <a href="doctor.html" style="text-decoration: none;"> رجوع </a>
+                        رجوع
 
                     </button>
 
@@ -51,9 +51,12 @@
 
                     </button>
 
-                    <a href="patient-edit.html" class="primary-btn" style="text-decoration: none;">
+                    <a class="primary-btn" href="patient-edit.html">
+
                         <i class="bi bi-pencil-square"></i>
+
                         تعديل
+
                     </a>
 
                 </div>
@@ -78,21 +81,15 @@
 
                         <h2 id="patient-name">
 
-                            اسم المريض
-
                         </h2>
 
-                        <span class="status active">
-
-                            نشط
+                        <span class="status " id="patient-status">
 
                         </span>
 
                     </div>
 
-                    <p class="patient-diagnosis">
-
-                        الاصابة
+                    <p id="patient-diagnosis">
 
                     </p>
 
@@ -126,9 +123,9 @@
 
                         </span>
 
-                        <strong id="patient-id">
+                        <strong id="patient-file-number">
 
-                            #1001
+
 
                         </strong>
 
@@ -144,7 +141,7 @@
 
                         <strong id="patient-age">
 
-                            السن
+
 
                         </strong>
 
@@ -160,7 +157,7 @@
 
                         <strong id="patient-phone">
 
-                            --------------
+
 
                         </strong>
 
@@ -176,7 +173,7 @@
 
                         <strong id="patient-doctor">
 
-                            -------------
+
 
                         </strong>
 
@@ -192,7 +189,7 @@
 
                         <strong id="patient-start">
 
-                            ------------
+
 
                         </strong>
 
@@ -208,7 +205,7 @@
 
                         <strong id="patient-last">
 
-                            ------------
+
 
                         </strong>
 
@@ -240,11 +237,7 @@
 
                         </span>
 
-                        <strong id="total-sessions">
-
-                            --
-
-                        </strong>
+                        <strong id="patient-total-sessions"></strong>
 
                     </div>
 
@@ -266,11 +259,7 @@
 
                         </span>
 
-                        <strong id="finished-sessions">
-
-                            --
-
-                        </strong>
+                        <strong id="patient-finished-sessions"></strong>
 
                     </div>
 
@@ -292,11 +281,7 @@
 
                         </span>
 
-                        <strong id="remaining-sessions">
-
-                            --
-
-                        </strong>
+                        <strong id="patient-remaining-sessions"></strong>
 
                     </div>
 
@@ -318,11 +303,7 @@
 
                         </span>
 
-                        <strong id="next-session">
-
-                            ----------------
-
-                        </strong>
+                        <strong id="patient-next-session"></strong>
 
                     </div>
 
@@ -375,6 +356,12 @@
 
                 </button>
 
+                <button class="tab-btn" data-tab="assessment">
+
+                    التقييم الطبي الشامل
+
+                </button>
+
             </nav>
 
 
@@ -396,82 +383,30 @@
                 <div class="details-grid">
 
                     <div class="detail-item">
-
-                        <span>
-
-                            التشخيص
-
-                        </span>
-
-                        <strong>
-
-                            ---------------
-
-                        </strong>
-
+                        <span>التشخيص</span>
+                        <strong id="patient-diagnosis-title"></strong>
                     </div>
 
                     <div class="detail-item">
-
-                        <span>
-
-                            الشكوى الرئيسية
-
-                        </span>
-
-                        <strong>
-
-                            -----------
-
-                        </strong>
-
+                        <span>الشكوى الرئيسية</span>
+                        <strong id="patient-chief-complaint"></strong>
                     </div>
 
                     <div class="detail-item">
-
-                        <span>
-
-                            تاريخ الإصابة
-
-                        </span>
-
-                        <strong>
-
-                            -------------
-
-                        </strong>
-
+                        <span>تاريخ الإصابة</span>
+                        <strong id="patient-injury-date"></strong>
                     </div>
 
                     <div class="detail-item">
-
-                        <span>
-
-                            شدة الألم
-
-                        </span>
-
-                        <strong>
-
-                            --------------
-
-                        </strong>
-
+                        <span>شدة الألم</span>
+                        <strong id="patient-pain-severity"></strong>
                     </div>
 
-                </div>
+                    <div class="text-card">
+                        <h3>ملاحظات الطبيب</h3>
 
-                <div class="text-card">
-
-                    <h3>
-
-                        ملاحظات الطبيب
-
-                    </h3>
-
-                    <p>
-                        ----------------------------------------
-                    </p>
+                        <p id="patient-doctor-notes"></p>
+                    </div>
 
                 </div>
 
@@ -496,105 +431,32 @@
                 <div class="details-grid">
 
                     <div class="detail-item">
-
-                        <span>
-
-                            نوع العلاج
-
-                        </span>
-
-                        <strong>
-
-                            -----------
-                        </strong>
-
+                        <span>نوع العلاج</span>
+                        <strong id="patient-treatment-type"></strong>
                     </div>
 
                     <div class="detail-item">
-
-                        <span>
-
-                            عدد الجلسات
-
-                        </span>
-
-                        <strong>
-
-                            --------
-
-                        </strong>
-
+                        <span>عدد الجلسات</span>
+                        <strong id="patient-treatment-sessions"></strong>
                     </div>
 
                     <div class="detail-item">
-
-                        <span>
-
-                            مدة الجلسة
-
-                        </span>
-
-                        <strong>
-
-                            -------
-
-                        </strong>
-
+                        <span>مدة الجلسة</span>
+                        <strong id="patient-treatment-session-duration"></strong>
                     </div>
 
                     <div class="detail-item">
-
-                        <span>
-
-                            عدد الجلسات بالأسبوع
-
-                        </span>
-
-                        <strong>
-
-                            --------
-
-                        </strong>
-
+                        <span>عدد الجلسات بالأسبوع</span>
+                        <strong id="patient-treatment-weekly-sessions"></strong>
                     </div>
 
-                </div>
+                    <div class="text-card">
 
-                <div class="text-card">
+                        <h3>أهداف العلاج</h3>
 
-                    <h3>
+                        <ul id="patient-treatment-goals" class="treatment-list"></ul>
 
-                        أهداف العلاج
-
-                    </h3>
-
-                    <ul class="treatment-list">
-
-                        <li>
-
-                            -------- .
-
-                        </li>
-
-                        <li>
-
-                            --------
-
-                        </li>
-
-                        <li>
-
-                            --------
-
-                        </li>
-
-                        <li>
-
-                            --------.
-
-                        </li>
-
-                    </ul>
+                    </div>
 
                 </div>
 
@@ -646,9 +508,7 @@
 
                         </thead>
 
-                        <tbody id="sessions-history-body">
-
-                        </tbody>
+                        <tbody id="sessions-history-body"></tbody>
 
                     </table>
 
@@ -736,39 +596,802 @@
 
             <!-- ================= Notes ================= -->
 
+
             <section class="content-card tab-content" id="notes">
 
                 <div class="section-header">
+                    <h2>ملاحظات الجلسة</h2>
+                </div>
 
-                    <h2>
+                <!-- Current Session Note -->
 
-                        ملاحظات الطبيب
+                <div class="text-card">
 
-                    </h2>
+                    <h3>ملاحظات الجلسة الحالية</h3>
 
-                    <span class="notes-last-update" id="notes-last-update"></span>
+                    <textarea id="current-session-note" class="doctor-notes" rows="8"
+                        placeholder="اكتب ملاحظات الجلسة الحالية..."></textarea>
+
+                    <div class="notes-actions">
+
+                        <button class="primary-btn save-note-btn">
+
+                            <i class="bi bi-floppy"></i>
+
+                            حفظ الملاحظة
+
+                        </button>
+
+                    </div>
 
                 </div>
 
-                <textarea class="doctor-notes" id="doctor-notes" rows="8" placeholder="اكتب ملاحظات الطبيب هنا...">
+                <!-- Notes History -->
 
-            </textarea>
+                <div class="text-card">
 
-                <div class="notes-actions">
+                    <h3>سجل الملاحظات</h3>
 
-                    <button class="primary-btn save-notes-btn">
+                    <div id="notes-history" class="notes-history">
 
-                        <i class="bi bi-floppy"></i>
-
-                        حفظ الملاحظات
-
-                    </button>
+                    </div>
 
                 </div>
 
             </section>
 
 
+
+            <!-- ================= Comprehensive Assessment ================= -->
+
+            <section class="content-card tab-content" id="assessment">
+
+                <div class="section-header">
+
+                    <h2>
+
+                        <i class="bi bi-clipboard2-pulse"></i>
+
+                        التقييم الطبي الشامل
+
+                    </h2>
+
+                </div>
+
+                <div class="accordion" id="assessment-accordion">
+
+                    <!-- ===== 1. البيانات الأساسية ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-basic">
+
+                                <i class="bi bi-person-vcard"></i>
+
+                                البيانات الأساسية
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-basic" class="accordion-collapse collapse show"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="details-grid">
+
+                                    <div class="detail-item">
+                                        <span>الاسم بالكامل</span>
+                                        <strong id="patient-full-name"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>الجنس</span>
+                                        <strong id="patient-gender"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>تاريخ الميلاد</span>
+                                        <strong id="patient-date-of-birth"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>العمر</span>
+                                        <strong id="age-patient"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>الرقم القومي</span>
+                                        <strong id="patient-national-id"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>الجنسية</span>
+                                        <strong id="patient-nationality"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>الحالة الاجتماعية</span>
+                                        <strong id="patient-marital-status"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>الهاتف</span>
+                                        <strong id="patient-phone-num"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>هاتف بديل</span>
+                                        <strong id="patient-emergency-phone"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>الشخص المسؤول عن المريض</span>
+                                        <strong id="patient-responsible-person"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>تاريخ إنشاء الملف</span>
+                                        <strong id="patient-created-at"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>رقم الملف</span>
+                                        <strong id="patient-file"></strong>
+                                    </div>
+
+                                    <div class="detail-item full-width">
+                                        <span>العنوان</span>
+                                        <strong id="patient-address"></strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 2. التاريخ الطبي ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-medical-history">
+
+                                <i class="bi bi-file-medical"></i>
+
+                                التاريخ الطبي
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-medical-history" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="details-grid">
+
+                                    <div class="detail-item">
+                                        <span>التشخيص الرئيسي</span>
+                                        <strong id="patient-main-diagnosis"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>التشخيص الطبي</span>
+                                        <strong id="patient-medical-diagnosis"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>الطبيب المحول</span>
+                                        <strong id="patient-referring-doctor"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>المستشفى / العيادة</span>
+                                        <strong id="patient-hospital"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>تاريخ بداية المشكلة</span>
+                                        <strong id="patient-condition-start-date"></strong>
+                                    </div>
+
+                                    <div class="detail-item full-width">
+                                        <span>وصف مختصر للحالة</span>
+                                        <strong id="patient-condition-description"></strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 3. التاريخ المرضي ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-chronic">
+
+                                <i class="bi bi-heart-pulse"></i>
+
+                                التاريخ المرضي
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-chronic" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div id="patient-medical-history-tags" class="info-tags"></div>
+
+                                <div class="details-grid stacked-top">
+
+                                    <div class="detail-item">
+                                        <span>الحساسية</span>
+                                        <strong id="patient-allergies"></strong>
+                                    </div>
+
+                                    <div class="detail-item full-width">
+                                        <span>العمليات السابقة</span>
+                                        <strong id="patient-previous-surgeries"></strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 4. الإحالة ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-referral">
+
+                                <i class="bi bi-send"></i>
+
+                                الإحالة
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-referral" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="details-grid">
+
+                                    <div class="detail-item">
+                                        <span>الجهة المحولة</span>
+                                        <strong id="patient-referral-source"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>تاريخ الإحالة</span>
+                                        <strong id="patient-referral-date"></strong>
+
+                                    </div>
+
+                                    <div class="detail-item full-width">
+                                        <span>سبب الإحالة</span>
+                                        <strong id="patient-referral-reason"></strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 5. التاريخ الطبي والجراحي ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-surgical-history">
+
+                                <i class="bi bi-clock-history"></i>
+
+                                التاريخ الطبي والجراحي
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-surgical-history" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="details-grid">
+
+                                    <div class="detail-item">
+                                        <span>دخول المستشفى سابقاً</span>
+                                        <strong id="patient-previous-hospitalization"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>علاج طبيعي سابق</span>
+                                        <strong id="patient-previous-physiotherapy"></strong>
+                                    </div>
+
+                                    <div class="detail-item full-width">
+                                        <span>جراحات أو تدخلات</span>
+                                        <strong id="patient-surgical-history"></strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 6. التقييم البدني ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-physical">
+
+                                <i class="bi bi-person-arms-up"></i>
+
+                                التقييم البدني
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-physical" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="physical-assessment-grid">
+
+                                    <div class="detail-item">
+                                        <span>ROM (مدى الحركة)</span>
+                                        <span id="patient-rom-level" class="level-badge active"></span>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>Flexibility (المرونة)</span>
+                                        <span id="patient-flexibility-level" class="level-badge active"></span>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>Balance (التوازن)</span>
+                                        <span id="patient-balance-level" class="level-badge active"></span>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>Coordination (التناسق الحركي)</span>
+                                        <span id="patient-coordination-level" class="level-badge active"></span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 7. القياسات ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-measurements">
+
+                                <i class="bi bi-rulers"></i>
+
+                                القياسات
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-measurements" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="details-grid">
+
+                                    <div class="detail-item">
+                                        <span>الطول</span>
+                                        <strong id="patient-height"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>الوزن</span>
+                                        <strong id="patient-weight"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>مؤشر كتلة الجسم (BMI)</span>
+                                        <strong id="patient-bmi"></strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 8. الحالة الوظيفية ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-functional">
+
+                                <i class="bi bi-person-walking"></i>
+
+                                الحالة الوظيفية
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-functional" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="details-grid">
+
+                                    <div class="detail-item">
+                                        <span>القدرة على الحركة</span>
+                                        <strong id="patient-mobility-status"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>الأجهزة المستخدمة</span>
+                                        <strong id="patient-assistive-device"></strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 9. أعراض وعلامات الإعاقة ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-disability">
+
+                                <i class="bi bi-universal-access"></i>
+
+                                أعراض وعلامات الإعاقة
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-disability" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="details-grid">
+
+                                    <div class="detail-item">
+                                        <span>وجود إعاقة</span>
+                                        <strong id="patient-has-disability"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>نوعها</span>
+                                        <strong id="patient-disability-type"></strong>
+                                    </div>
+
+                                    <div class="detail-item">
+                                        <span>شدتها</span>
+                                        <strong id="patient-disability-severity"></strong>
+                                    </div>
+
+                                    <div class="detail-item full-width">
+                                        <span>الأعراض</span>
+                                        <strong id="patient-disability-symptoms"></strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 10. الاختبارات الخاصة ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-special-tests">
+
+                                <i class="bi bi-clipboard2-data"></i>
+
+                                الاختبارات الخاصة
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-special-tests" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="detail-item">
+                                    <span>تفاصيل الاختبارات الخاصة</span>
+                                    <strong id="patient-special-tests"></strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 11. تقييم الألم ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-pain">
+
+                                <i class="bi bi-emoji-frown"></i>
+
+                                تقييم الألم
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-pain" class="accordion-collapse collapse" data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="details-grid">
+
+                                    <div class="detail-item">
+                                        <span>مكان الألم</span>
+                                        <strong id="patient-pain-location"></strong>
+                                    </div>
+
+                                    <div class="detail-item full-width">
+
+                                        <span>درجة الألم</span>
+
+                                        <div class="pain-display">
+
+                                            <div id="patient-pain-bar" class="pain-bar-fill"></div>
+
+                                            <strong id="patient-pain-score"></strong>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 12. جودة الحياة ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-qol">
+
+                                <i class="bi bi-heart"></i>
+
+                                جودة الحياة (QOL)
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-qol" class="accordion-collapse collapse" data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="details-grid">
+
+                                    <div class="detail-item">
+                                        <span>المهنة</span>
+                                        <strong id="patient-occupation"></strong>
+                                    </div>
+
+                                    <div class="detail-item full-width">
+                                        <span>تأثير العمل على الحالة</span>
+                                        <strong id="patient-work-impact"></strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 13. الأدوية الحالية ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-medications">
+
+                                <i class="bi bi-capsule"></i>
+
+                                الأدوية الحالية
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-medications" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="detail-item">
+                                    <span>قائمة الأدوية الحالية</span>
+                                    <strong id="patient-current-medications"></strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 14. تعليمات المتابعة ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-followup">
+
+                                <i class="bi bi-journal-check"></i>
+
+                                تعليمات المتابعة
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-followup" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div class="details-grid">
+
+                                    <div class="detail-item full-width">
+                                        <span>التمارين</span>
+                                        <strong id="patient-followup-exercises"></strong>
+                                    </div>
+
+                                    <div class="detail-item full-width">
+                                        <span>التغذية</span>
+                                        <strong id="patient-followup-nutrition"></strong>
+                                    </div>
+
+                                    <div class="detail-item full-width">
+                                        <span>الاحتياطات</span>
+                                        <strong id="patient-followup-precautions"></strong>
+                                    </div>
+
+                                    <div class="detail-item full-width">
+                                        <span>البرنامج المنزلي</span>
+                                        <strong id="patient-followup-home-program"></strong>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ===== 15. التثقيف الصحي ===== -->
+
+                    <div class="accordion-item">
+
+                        <h3 class="accordion-header">
+
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#acc-education">
+
+                                <i class="bi bi-mortarboard"></i>
+
+                                التثقيف الصحي
+
+                            </button>
+
+                        </h3>
+
+                        <div id="acc-education" class="accordion-collapse collapse"
+                            data-bs-parent="#assessment-accordion">
+
+                            <div class="accordion-body">
+
+                                <div id="patient-health-education-tags" class="info-tags"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
 
             <!-- ================= Footer Actions ================= -->
 
@@ -897,7 +1520,7 @@
     <!-- ================= Toast Container ================= -->
 
     <div class="toast-container" id="toast-container"></div>
-    <script src="patient/main.js"></script>
+    <script type="module" src="patient/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

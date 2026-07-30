@@ -30,7 +30,7 @@
 
                             <i class="bi bi-bell"></i>
 
-                            <span class="notification-badge">3</span>
+                            <span class="notification-badge" id="notifications-count"> </span>
 
                         </button>
 
@@ -38,48 +38,7 @@
 
                             <h4>الإشعارات</h4>
 
-                            <div class="notification-item">
-
-                                <i class="bi bi-person-plus-fill"></i>
-
-                                <div>
-
-                                    <strong>تم إضافة مريض جديد</strong>
-
-                                    <small>منذ 5 دقائق</small>
-
-                                </div>
-
-                            </div>
-
-                            <div class="notification-item">
-
-                                <i class="bi bi-calendar-check"></i>
-
-                                <div>
-
-                                    <strong>جلسة محمد أحمد بدأت</strong>
-
-                                    <small>منذ 15 دقيقة</small>
-
-                                </div>
-
-                            </div>
-
-                            <div class="notification-item">
-
-                                <i class="bi bi-pencil-square"></i>
-
-                                <div>
-
-                                    <strong>تم تعديل ملف مريض</strong>
-
-                                    <small>منذ ساعة</small>
-
-                                </div>
-
-                            </div>
-
+                            <div id="notifications-list"></div>
                             <button class="show-all-btn">
 
                                 عرض كل الإشعارات
@@ -97,7 +56,7 @@
 
                             <i class="bi bi-person-circle"></i>
 
-                            <span>د. أحمد</span>
+                            <span id="doctor-name"></span>
 
                         </button>
 
@@ -109,9 +68,9 @@
 
                                 <div>
 
-                                    <h4>د. أحمد</h4>
+                                    <h4 id="doctor-dropdown-name"></h4>
 
-                                    <span>doctor</span>
+                                    <span id="doctor-specialization"></span>
 
                                 </div>
 
@@ -139,7 +98,7 @@
 
                                 <i class="bi bi-box-arrow-right"></i>
 
-                                تسجيل الخروج 
+                                تسجيل الخروج
 
                             </button>
 
@@ -228,8 +187,7 @@
 
     <!-- ================= Toast Container ================= -->
     <div class="toast-container" id="toast-container"></div>
-
-    <script src="doctor/doctor.js"></script>
+    <script type="module" src="doctor/doctor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
