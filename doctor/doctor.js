@@ -1,10 +1,11 @@
 console.log("Doctor Dashboard Loaded");
 
+import database from "../data/mockDatabase.js";
 /* =========================
    SELECTORS
 ========================= */
 
-const patientSearch = document.querySelector("#patient-search");
+const patientSearch = document.getElementById("patient-search");
 const patientsCount = document.querySelector("#patients-count");
 const profileBtn = document.querySelector(".profile-btn");
 const profileDropdown = document.querySelector(".profile-dropdown");
@@ -12,16 +13,19 @@ const notificationBtn = document.querySelector(".notification-btn");
 const notificationDropdown = document.querySelector(".notification-dropdown");
 const logoutBtn = document.querySelector(".logout-btn");
 const patientsTableBody = document.querySelector("#patients-table-body");
+const doctorName = document.getElementById("doctor-name");
+const doctorDropdownName = document.getElementById("doctor-dropdown-name");
+const doctorSpecialization = document.getElementById("doctor-specialization");
+const notificationsList = document.getElementById("notifications-list");
+
+const notificationsCount = document.getElementById("notifications-count");
 
 /* =========================
    DATABASE
 ========================= */
+const currentDoctor = database.doctors[0];
+const patients = database.patients;
 
-const patients = [
-    { id: 1, name: "محمد أحمد", age: 32, diagnosis: "خشونة الركبة", phone: "01012345678", sessions: 6, totalSessions: 12, status: "نشط" },
-    { id: 2, name: "أحمد علي", age: 28, diagnosis: "قطع رباط صليبي", phone: "01123456789", sessions: 4, totalSessions: 10, status: "معلق" },
-    { id: 3, name: "يوسف سمير", age: 41, diagnosis: "انزلاق غضروفي", phone: "01234567890", sessions: 10, totalSessions: 10, status: "منتهي" }
-];
 
 /* ==========================================================
                         TOAST
@@ -55,37 +59,88 @@ function getStatusClass(status) {
     }
 }
 
-/* =========================================================
-   PATIENTS TABLE
-========================================================= */
 
-function renderPatientsTable(data = patients) {
-    let html = "";
-    data.forEach(patient => {
-        html += `
-        <tr>
-            <td>${patient.name}</td>
-            <td>${patient.diagnosis}</td>
-            <td>${patient.phone}</td>
-            <td><span class="status ${getStatusClass(patient.status)}">${patient.status}</span></td>
-            <td>
-                <button class="primary-btn open-patient-btn" data-id="${patient.id}">
-                    <i class="bi bi-folder2-open"></i>
-                    فتح الملف
-                </button>
-            </td>
-        </tr>
-        `;
-    });
-    updatePatientsCount(data.length);
-    patientsTableBody.innerHTML = html;
+function renderDoctorInfo() {
+
+    doctorName.textContent = currentDoctor.fullName;
+
+    doctorDropdownName.textContent = currentDoctor.fullName;
+
+    doctorSpecialization.textContent = currentDoctor.specialization;
+
 }
 
+function renderPatients(list = patients) {
+
+    patientsTableBody.innerHTML = "";
+
+    list.forEach(patient => {
+
+        patientsTableBody.innerHTML += `
+
+        <tr>
+
+            <td>${patient.fullName}</td>
+
+            <td>${patient.diagnosis.diagnosis}</td>
+
+            <td>${patient.phone}</td>
+
+            <td>
+
+                <span class="status active">
+
+                    ${patient.status}
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <button
+                    class="primary-btn view-patient"
+                    data-id="${patient.id}">
+
+                    عرض
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    patientsCount.textContent = `${list.length} مريض`;
+    bindPatientButtons();
+
+}
 function updatePatientsCount(count) {
     if (!patientsCount) return;
     patientsCount.textContent = `إجمالي المرضى : ${count}`;
 }
+function bindPatientButtons() {
 
+    const buttons = document.querySelectorAll(".view-patient");
+
+    buttons.forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            const patientId = this.dataset.id;
+
+            localStorage.setItem("currentPatientId", patientId);
+
+            window.location.href = "../patient.html";
+
+        });
+
+    });
+
+}
 function renderEmptyState() {
     patientsTableBody.innerHTML = `
     <tr>
@@ -118,22 +173,49 @@ document.addEventListener("click", function (event) {
 /* =========================================================
    SEARCH
 ========================================================= */
+function searchPatients(searchValue) {
 
-function searchPatients() {
-    const value = patientSearch.value.trim().toLowerCase();
+    const value = searchValue.trim().toLowerCase();
+
     if (value === "") {
-        renderPatientsTable();
+
+        renderPatients(database.patients);
+
         return;
+
     }
-    const filteredPatients = patients.filter(patient =>
-        patient.name.toLowerCase().includes(value) ||
-        patient.phone.includes(value) ||
-        patient.diagnosis.toLowerCase().includes(value)
-    );
-    filteredPatients.length === 0 ? renderEmptyState() : renderPatientsTable(filteredPatients);
+
+    const filteredPatients = database.patients.filter(patient => {
+
+        return (
+
+            patient.fullName.toLowerCase().includes(value) ||
+
+            patient.fileNumber.toLowerCase().includes(value) ||
+
+            patient.phone.includes(value)
+
+        );
+
+    });
+
+    if (filteredPatients.length === 0) {
+
+        renderEmptyState();
+
+        return;
+
+    }
+
+    renderPatients(filteredPatients);
+
 }
 
-patientSearch.addEventListener("input", searchPatients);
+patientSearch?.addEventListener("input", function () {
+
+    searchPatients(this.value);
+
+});
 
 /* =========================================================
    PROFILE DROPDOWN
@@ -152,6 +234,35 @@ profileBtn.addEventListener("click", function (event) {
 /* =========================================================
    NOTIFICATIONS
 ========================================================= */
+function renderNotifications() {
+
+    notificationsList.innerHTML = "";
+
+    database.notifications.forEach(notification => {
+
+        notificationsList.innerHTML += `
+
+        <div class="notification-item">
+
+            <i class="bi ${notification.icon}"></i>
+
+            <div>
+
+                <strong>${notification.title}</strong>
+
+                <small>${notification.time}</small>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    notificationsCount.textContent = database.notifications.length;
+
+}
 
 function toggleNotifications() {
     notificationDropdown.classList.toggle("active");
@@ -184,12 +295,19 @@ logoutDropdownBtn?.addEventListener("click", function (event) {
     }, 500);
 });
 
+
+
 /* =========================================================
    INIT
 ========================================================= */
 
 function init() {
-    renderPatientsTable();
-}
 
+   renderDoctorInfo();
+
+renderPatients();
+
+renderNotifications();
+
+}
 init();
