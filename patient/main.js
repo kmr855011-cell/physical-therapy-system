@@ -1,13 +1,13 @@
-console.log("Patient Profile Loaded");
+import database from "../data/mockDatabase.js";
+
 
 /* ==========================================================
                         SELECTORS
 ========================================================== */
 
 const backBtn = document.querySelector(".back-btn");
-
 const tabButtons = document.querySelectorAll(".tab-btn");
-
+const Statue = document.getElementsByClassName("status");
 const tabContents = document.querySelectorAll(".tab-content");
 
 const sessionsHistoryBody = document.querySelector("#sessions-history-body");
@@ -54,96 +54,42 @@ const notesLastUpdate = document.querySelector("#notes-last-update");
 
 
 /* ==========================================================
-                        DATABASE
+                     DATABASE SELECTORS
 ========================================================== */
 
-const patientDB = {
+const patientName = document.querySelector("#patient-name");
+const patientFullName = document.getElementById("patient-full-name")
+const patientStatus = document.getElementById("patient-status")
+const patientGender = document.querySelector("#patient-gender");
+const patientBirthDate = document.querySelector("#patient-birth-date");
+const patientAge = document.querySelector("#patient-age");
+const patientNationalId = document.querySelector("#patient-national-id");
+const patientNationality = document.querySelector("#patient-nationality");
+const patientMaritalStatus = document.querySelector("#patient-marital-status");
+const patientPhone = document.querySelector("#patient-phone");
+const patientEmergencyPhone = document.querySelector("#patient-emergency-phone");
+const patientResponsiblePerson = document.querySelector("#patient-responsible-person");
+const patientCreatedAt = document.querySelector("#patient-created-at");
+const patientFileNumber = document.querySelector("#patient-file-number");
+const patientAddress = document.querySelector("#patient-address");
+const currentSessionNote = document.getElementById("current-session-note");
+const notesHistory = document.getElementById("notes-history");
+const saveNoteBtn = document.querySelector(".save-note-btn");
 
-    sessions: [
+/* ==========================================================
+                        DATABASE
+========================================================== */
+const patientId =
+    Number(new URLSearchParams(window.location.search).get("id")) || 1;
 
-        {
-            number: 1,
-            date: "05 / 07 / 2026",
-            doctor: "د. أحمد",
-            status: "منتهي",
-            notes: "تحسن ملحوظ في مدى الحركة"
-        },
+const currentPatientId = Number(localStorage.getItem("currentPatientId"));
 
-        {
-            number: 2,
-            date: "08 / 07 / 2026",
-            doctor: "د. أحمد",
-            status: "منتهي",
-            notes: "الاستمرار على نفس الخطة العلاجية"
-        },
+const patient =
+    database.patients.find(p => p.id === currentPatientId);
 
-        {
-            number: 3,
-            date: "10 / 07 / 2026",
-            doctor: "د. أحمد",
-            status: "قيد الانتظار",
-            notes: "-"
-        }
-
-    ],
-
-    exercises: [
-
-        {
-            id: 1,
-            name: "--------",
-            icon: "bi-activity"
-        },
-
-        {
-            id: 2,
-            name: "--------",
-            icon: "bi-arrow-repeat"
-        },
-
-        {
-            id: 3,
-            name: "--------",
-            icon: "bi-person-arms-up"
-        }
-
-    ],
-
-    devices: [
-
-        {
-            id: 1,
-            name: "--------",
-            icon: "bi-soundwave"
-        },
-
-        {
-            id: 2,
-            name: "-------- ",
-            icon: "bi-lightning-charge"
-        }
-
-    ],
-
-    attachments: [
-
-        {
-            id: 1,
-            name: "--------",
-            icon: "bi-file-earmark-medical"
-        },
-
-        {
-            id: 2,
-            name: "--------",
-            icon: "bi-file-earmark-text"
-        }
-
-    ]
-
-};
-
-
+    
+const doctor = database.doctors.find(
+    doctor => doctor.id === patient.doctorId);
 /* ==========================================================
                         TOAST
 ========================================================== */
@@ -233,6 +179,36 @@ document.addEventListener("keydown", function (event) {
 
 });
 
+// / * ==========================================================
+//                     BASIC INFO
+// ========================================================== */
+
+
+
+function getStatusText(status) {
+
+    switch (status) {
+
+        case "active":
+            return "نشط";
+
+        case "pending":
+            return "قيد العلاج";
+
+        case "inactive":
+            return "متوقف";
+
+        default:
+            return status;
+
+    }
+
+}
+
+
+
+
+
 
 /* ==========================================================
                         TABS
@@ -273,13 +249,13 @@ function getStatusClass(status) {
 
     switch (status) {
 
-        case "منتهي":
+        case "مكتملة":
             return "active";
 
-        case "قيد الانتظار":
+        case "جارية":
             return "pending";
 
-        case "ملغي":
+        case "قادمة":
             return "inactive";
 
         default:
@@ -289,20 +265,19 @@ function getStatusClass(status) {
 
 }
 
-
 /* ==========================================================
                     SESSIONS HISTORY
 ========================================================== */
 
-function renderSessionsHistory(data = patientDB.sessions) {
+function renderSessionsHistory() {
 
     if (!sessionsHistoryBody) return;
 
-    let html = "";
+    sessionsHistoryBody.innerHTML = "";
 
-    data.forEach(session => {
+    patient.sessions.forEach(session => {
 
-        html += `
+        sessionsHistoryBody.innerHTML += `
 
         <tr>
 
@@ -326,7 +301,7 @@ function renderSessionsHistory(data = patientDB.sessions) {
 
             <td>
 
-                <button class="primary-btn" type="button">
+                <button class="primary-btn">
 
                     عرض
 
@@ -340,11 +315,7 @@ function renderSessionsHistory(data = patientDB.sessions) {
 
     });
 
-    sessionsHistoryBody.innerHTML = html;
-
 }
-
-
 /* ==========================================================
                     ADD SESSION FORM
 ========================================================== */
@@ -379,7 +350,7 @@ addSessionForm?.addEventListener("submit", function (event) {
 
     const newSession = {
 
-        number: patientDB.sessions.length + 1,
+        number: patient.sessions.length + 1,
 
         date: sessionDateInput.value.trim(),
 
@@ -391,7 +362,7 @@ addSessionForm?.addEventListener("submit", function (event) {
 
     };
 
-    patientDB.sessions.push(newSession);
+    patient.sessions.push(newSession);
 
     renderSessionsHistory();
 
@@ -406,34 +377,42 @@ addSessionForm?.addEventListener("submit", function (event) {
 });
 
 
+
 /* ==========================================================
-                    INFO CARDS
-                (exercises / devices / attachments)
+                    EXERCISES
 ========================================================== */
 
-function renderInfoCards(container, data, subtitle) {
+function renderExercises() {
 
-    if (!container) return;
+    if (!exerciseGrid) return;
 
-    let html = "";
+    exerciseGrid.innerHTML = "";
 
-    data.forEach(item => {
+    patient.exercises.forEach(exercise => {
 
-        html += `
+        exerciseGrid.innerHTML += `
 
-        <article class="info-card" data-id="${item.id}">
+        <article class="info-card">
 
             <div class="info-card-icon">
 
-                <i class="bi ${item.icon}"></i>
+                <i class="bi ${exercise.icon}"></i>
 
             </div>
 
             <div class="info-card-content">
 
-                <h4>${item.name}</h4>
+                <h4>${exercise.name}</h4>
 
-                <span>${subtitle}</span>
+                <p>${exercise.description}</p>
+
+                <small>
+
+                    ${exercise.sets} مجموعات •
+                    ${exercise.reps} تكرار •
+                    ${exercise.duration}
+
+                </small>
 
             </div>
 
@@ -443,10 +422,129 @@ function renderInfoCards(container, data, subtitle) {
 
     });
 
-    container.innerHTML = html;
+}
+
+
+/* ==========================================================
+                    DEVICES
+========================================================== */
+
+function renderDevices() {
+
+    if (!devicesGrid) return;
+
+    devicesGrid.innerHTML = "";
+
+    patient.devices.forEach(device => {
+
+        devicesGrid.innerHTML += `
+
+        <article class="info-card">
+
+            <div class="info-card-icon">
+
+                <i class="bi ${device.icon}"></i>
+
+            </div>
+
+            <div class="info-card-content">
+
+                <h4>${device.name}</h4>
+
+                <p>${device.description}</p>
+
+                <small>${device.sessions}</small>
+
+            </div>
+
+        </article>
+
+        `;
+
+    });
 
 }
 
+
+/* ==========================================================
+                    ATTACHMENTS
+========================================================== */
+
+function renderAttachments() {
+
+    if (!attachmentsGrid) return;
+
+    attachmentsGrid.innerHTML = "";
+
+    patient.attachments.forEach(file => {
+
+        attachmentsGrid.innerHTML += `
+
+        <article class="info-card">
+
+            <div class="info-card-icon">
+
+                <i class="bi ${file.icon}"></i>
+
+            </div>
+
+            <div class="info-card-content">
+
+                <h4>${file.name}</h4>
+
+                <p>${file.type}</p>
+
+                <small>
+
+                    ${file.size} • ${file.uploadDate}
+
+                </small>
+
+            </div>
+
+        </article>
+
+        `;
+
+    });
+
+}
+
+/* ==========================================================
+                        NOTES
+========================================================== */
+
+function renderNotes() {
+
+    if (!notesHistory) return;
+
+    currentSessionNote.value = patient.currentSessionNote || "";
+
+    notesHistory.innerHTML = "";
+
+    patient.notes.forEach(note => {
+
+        notesHistory.innerHTML += `
+
+        <article class="note-history-card">
+
+            <div class="note-history-header">
+
+                <strong>${note.date}</strong>
+
+                <span>${note.doctor}</span>
+
+            </div>
+
+            <p>${note.text}</p>
+
+        </article>
+
+        `;
+
+    });
+
+}
 
 /* ==========================================================
                         SAVE
@@ -456,7 +554,7 @@ saveBtn?.addEventListener("click", function () {
 
     // مؤقتًا: حفظ وهمي إلى أن يتوفر Backend
 
-    console.log("Saving patient profile...", patientDB);
+    console.log("Saving patient profile...", patient);
 
     showToast("تم حفظ بيانات المريض بنجاح", "success", "bi-floppy");
 
@@ -547,17 +645,25 @@ attachmentInput?.addEventListener("change", function () {
 
     files.forEach(file => {
 
-        patientDB.attachments.push({
+        patient.attachments.push({
 
-            id: patientDB.attachments.length + 1,
+            id: patient.attachments.length + 1,
+
             name: file.name,
-            icon: "bi-file-earmark-text"
+
+            type: file.name.split(".").pop().toUpperCase(),
+
+            size: `${(file.size / 1024 / 1024).toFixed(2)} MB`,
+
+            uploadDate: formatNow().split("،")[0],
+
+            icon: "bi-file-earmark"
 
         });
 
     });
 
-    renderInfoCards(attachmentsGrid, patientDB.attachments, "مرفق طبي");
+    renderInfoCards(attachmentsGrid, patient.attachments, "مرفق طبي");
 
     attachmentInput.value = "";
 
@@ -576,39 +682,395 @@ attachmentInput?.addEventListener("change", function () {
                     NOTES
 ========================================================== */
 
-function formatNow() {
+saveNoteBtn?.addEventListener("click", function () {
 
-    const now = new Date();
+    const text = currentSessionNote.value.trim();
 
-    return now.toLocaleString("ar-EG", {
+    if (text === "") {
 
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
+        showToast("اكتب الملاحظة أولاً", "warning", "bi-exclamation-circle");
+
+        return;
+
+    }
+
+    patient.notes.unshift({
+
+        id: patient.notes.length + 1,
+
+        date: formatNow().split("،")[0],
+
+        doctor: doctor.fullName,
+
+        text: text
+
+    });
+
+    patient.currentSessionNote = "";
+
+    renderNotes();
+
+    showToast("تم حفظ الملاحظة", "success", "bi-floppy");
+
+});
+
+
+/* ==========================================================
+                    PATIENT HEADER
+========================================================== */
+function renderPatientHeader() {
+
+    const patientName = document.getElementById("patient-name");
+    const patientStatus = document.getElementById("patient-status");
+    const patientDiagnosis = document.getElementById("patient-diagnosis");
+
+    patientName.textContent = patient.fullName;
+
+    patientDiagnosis.textContent = patient.diagnosis.diagnosis;
+    patientStatus.textContent = getStatusText(patient.status);
+
+    patientStatus.className = `status ${patient.status}`;
+
+}
+
+/* ==========================================================
+                    PATIENT INFORMATION
+========================================================== */
+
+function renderPatientInfo() {
+
+    const doctor = database.doctors.find(
+        doctor => doctor.id === patient.doctorId
+    );
+
+    document.getElementById("patient-file-number").textContent =
+        patient.fileNumber;
+
+    document.getElementById("patient-age").textContent =
+        `${patient.age} سنة`;
+
+    document.getElementById("patient-phone").textContent =
+        patient.phone;
+
+    document.getElementById("patient-doctor").textContent =
+        doctor ? doctor.fullName : "-";
+
+    document.getElementById("patient-start").textContent =
+        patient.startDate;
+
+    document.getElementById("patient-last").textContent =
+        patient.lastVisit;
+
+}
+
+/* ==========================================================
+                    SUMMARY
+========================================================== */
+
+function renderPatientSummary() {
+
+    document.getElementById("patient-total-sessions").textContent =
+        patient.totalSessions;
+
+    document.getElementById("patient-finished-sessions").textContent =
+        patient.completedSessions;
+
+    document.getElementById("patient-remaining-sessions").textContent =
+        patient.remainingSessions;
+
+    document.getElementById("patient-next-session").textContent =
+        patient.nextAppointment;
+
+}
+
+/* ==========================================================
+                    DIAGNOSIS
+========================================================== */
+
+function renderDiagnosis() {
+
+
+    document.getElementById("patient-diagnosis-title").textContent =
+        patient.diagnosis.diagnosis;
+    document.getElementById("patient-chief-complaint").textContent =
+        patient.diagnosis.complaint;
+
+    document.getElementById("patient-injury-date").textContent =
+        patient.diagnosis.injuryDate;
+
+    document.getElementById("patient-pain-severity").textContent =
+        patient.diagnosis.painLevel;
+
+    document.getElementById("patient-doctor-notes").textContent =
+        patient.diagnosis.doctorNotes;
+
+}
+/* ==========================================================
+                    TREATMENT
+========================================================== */
+
+function renderTreatment() {
+
+    document.getElementById("patient-treatment-type").textContent =
+        patient.treatmentPlan.treatmentType;
+
+    document.getElementById("patient-treatment-sessions").textContent =
+        `${patient.treatmentPlan.sessions} جلسة`;
+
+    document.getElementById("patient-treatment-session-duration").textContent =
+        patient.treatmentPlan.sessionDuration;
+
+    document.getElementById("patient-treatment-weekly-sessions").textContent =
+        `${patient.treatmentPlan.weeklySessions} جلسات`;
+
+    const goalsList = document.getElementById("patient-treatment-goals");
+
+    goalsList.innerHTML = "";
+
+    patient.treatmentPlan.goals.forEach(goal => {
+
+        goalsList.innerHTML += `
+            <li>${goal}</li>
+        `;
 
     });
 
 }
 
-saveNotesBtn?.addEventListener("click", function () {
+/* ==========================================================
+                    ASSESSMENT
+========================================================== */
 
-    // مؤقتًا: حفظ وهمي إلى أن يتوفر Backend
+function renderAssessment() {
 
-    console.log("Saving notes:", doctorNotesInput.value.trim());
+    const assessment = patient.assessment;
 
-    if (notesLastUpdate) {
+    /* ===== البيانات الأساسية ===== */
 
-        notesLastUpdate.textContent = `آخر تحديث : ${formatNow()}`;
+    document.getElementById("patient-full-name").textContent = patient.fullName;
 
-    }
+    document.getElementById("patient-gender").textContent = patient.gender;
 
-    showToast("تم حفظ الملاحظات بنجاح", "success", "bi-journal-check");
+    document.getElementById("patient-date-of-birth").textContent = patient.dateOfBirth;
 
-});
+    document.getElementById("age-patient").textContent = patient.age;
+
+    document.getElementById("patient-national-id").textContent = patient.nationalId;
+
+    document.getElementById("patient-nationality").textContent = patient.nationality;
+
+    document.getElementById("patient-marital-status").textContent = patient.maritalStatus;
+
+    document.getElementById("patient-phone-num").textContent = patient.phone;
+
+    document.getElementById("patient-emergency-phone").textContent = patient.emergencyPhone;
+
+    document.getElementById("patient-responsible-person").textContent =
+        patient.responsiblePerson;
+
+    document.getElementById("patient-created-at").textContent =
+        patient.createdAt;
+
+    document.getElementById("patient-file").textContent =
+        patient.fileNumber;
+
+    document.getElementById("patient-address").textContent =
+        patient.address;
 
 
+
+    /* ===== التاريخ الطبي ===== */
+
+    document.getElementById("patient-main-diagnosis").textContent =
+        assessment.medicalHistory.mainDiagnosis;
+
+    document.getElementById("patient-medical-diagnosis").textContent =
+        assessment.medicalHistory.medicalDiagnosis;
+
+    document.getElementById("patient-referring-doctor").textContent =
+        assessment.medicalHistory.referringDoctor;
+
+    document.getElementById("patient-hospital").textContent =
+        assessment.medicalHistory.hospital;
+
+    document.getElementById("patient-condition-start-date").textContent =
+        assessment.medicalHistory.conditionStartDate;
+
+    document.getElementById("patient-condition-description").textContent =
+        assessment.medicalHistory.conditionDescription;
+
+
+
+    /* ===== التاريخ المرضي ===== */
+
+    const historyTags = document.getElementById("patient-medical-history-tags");
+
+    historyTags.innerHTML = "";
+
+    assessment.chronicHistory.diseases.forEach(disease => {
+
+        historyTags.innerHTML += `
+
+        <span class="info-tag active">
+
+            ${disease}
+
+        </span>
+
+        `;
+
+    });
+
+    document.getElementById("patient-allergies").textContent =
+        assessment.chronicHistory.allergies;
+
+    document.getElementById("patient-previous-surgeries").textContent =
+        assessment.chronicHistory.previousSurgeries;
+
+
+
+    /* ===== الإحالة ===== */
+
+    document.getElementById("patient-referral-source").textContent =
+        assessment.referral.source;
+
+    document.getElementById("patient-referral-date").textContent =
+        assessment.referral.date;
+
+    document.getElementById("patient-referral-reason").textContent =
+        assessment.referral.reason;
+
+
+
+    /* ===== التاريخ الطبي والجراحي ===== */
+
+    document.getElementById("patient-previous-hospitalization").textContent =
+        assessment.medicalSurgicalHistory.previousHospitalization;
+
+    document.getElementById("patient-previous-physiotherapy").textContent =
+        assessment.medicalSurgicalHistory.previousPhysiotherapy;
+
+    document.getElementById("patient-surgical-history").textContent =
+        assessment.medicalSurgicalHistory.surgicalHistory;
+
+
+    /* ===== التقييم البدني ===== */
+
+    document.getElementById("patient-rom-level").textContent =
+        assessment.physicalAssessment.rom;
+
+    document.getElementById("patient-flexibility-level").textContent =
+        assessment.physicalAssessment.flexibility;
+
+    document.getElementById("patient-balance-level").textContent =
+        assessment.physicalAssessment.balance;
+
+    document.getElementById("patient-coordination-level").textContent =
+        assessment.physicalAssessment.coordination;
+
+
+    /* ===== القياسات ===== */
+
+    document.getElementById("patient-height").textContent =
+        assessment.measurements.height;
+
+    document.getElementById("patient-weight").textContent =
+        assessment.measurements.weight;
+
+    document.getElementById("patient-bmi").textContent =
+        assessment.measurements.bmi;
+
+
+    /* ===== الحالة الوظيفية ===== */
+
+    document.getElementById("patient-mobility-status").textContent =
+        assessment.functionalStatus.mobilityStatus;
+
+    document.getElementById("patient-assistive-device").textContent =
+        assessment.functionalStatus.assistiveDevice;
+
+
+
+
+    /* ===== أعراض وعلامات الإعاقة ===== */
+
+    document.getElementById("patient-has-disability").textContent =
+        assessment.disability.hasDisability;
+
+    document.getElementById("patient-disability-type").textContent =
+        assessment.disability.type;
+
+    document.getElementById("patient-disability-severity").textContent =
+        assessment.disability.severity;
+
+    document.getElementById("patient-disability-symptoms").textContent =
+        assessment.disability.symptoms;
+
+
+    /* ===== الاختبارات الخاصة ===== */
+
+    document.getElementById("patient-special-tests").textContent =
+        assessment.specialTests.details;
+
+
+    /* ===== تقييم الألم ===== */
+
+    document.getElementById("patient-pain-location").textContent =
+        assessment.painAssessment.location;
+
+    document.getElementById("patient-pain-score").textContent =
+        `${assessment.painAssessment.score} / 10`;
+
+    document.getElementById("patient-pain-bar").style.width =
+        `${assessment.painAssessment.score * 10}%`;
+
+
+    /* ===== جودة الحياة ===== */
+
+    document.getElementById("patient-occupation").textContent =
+        assessment.qualityOfLife.occupation;
+
+    document.getElementById("patient-work-impact").textContent =
+        assessment.qualityOfLife.workImpact;
+
+
+    /* ===== الأدوية الحالية ===== */
+
+    document.getElementById("patient-current-medications").textContent =
+        assessment.medications.current;
+
+
+    /* ===== تعليمات المتابعة ===== */
+
+    document.getElementById("patient-followup-exercises").textContent =
+        assessment.followUp.exercises;
+
+    document.getElementById("patient-followup-nutrition").textContent =
+        assessment.followUp.nutrition;
+
+    document.getElementById("patient-followup-precautions").textContent =
+        assessment.followUp.precautions;
+
+    document.getElementById("patient-followup-home-program").textContent =
+        assessment.followUp.homeProgram;
+
+
+    /* ===== التثقيف الصحي ===== */
+
+    const educationTags = document.getElementById("patient-health-education-tags");
+
+    educationTags.innerHTML = "";
+
+    assessment.healthEducation.forEach(item => {
+
+        educationTags.innerHTML += `
+        <span class="info-tag active">
+            ${item}
+        </span>
+    `;
+
+    });
+}
 /* ==========================================================
                         BACK BUTTON
 ========================================================== */
@@ -620,19 +1082,33 @@ backBtn?.addEventListener("click", function () {
 });
 
 
+
 /* ==========================================================
                         INIT
 ========================================================== */
 
 function init() {
+    renderPatientHeader();
+
+    renderPatientInfo();
+
+    renderPatientSummary();
+
+    renderDiagnosis();
+
+    renderTreatment();
 
     renderSessionsHistory();
 
-    renderInfoCards(exerciseGrid, patientDB.exercises, "تمرين علاجي");
+    renderExercises();
 
-    renderInfoCards(devicesGrid, patientDB.devices, "جهاز علاجي");
+    renderDevices();
 
-    renderInfoCards(attachmentsGrid, patientDB.attachments, "مرفق طبي");
+    renderAttachments();
+
+    renderNotes();
+
+    renderAssessment();
 
 }
 
