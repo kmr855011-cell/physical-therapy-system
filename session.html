@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز الطارق | تسجيل جلسة</title>
+
+    <link rel="stylesheet" href="session/session.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <main class="session-page">
+        <section class="session-container">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="secondary-btn" id="back-button" type="button">
+                        <i class="bi bi-arrow-right"></i>
+                        رجوع
+                    </button>
+                    <div>
+                        <span class="page-kicker">جلسات العلاج الطبيعي</span>
+                        <h1>تسجيل جلسة جديدة</h1>
+                    </div>
+                </div>
+
+                <div class="topbar-right">
+                    <button class="secondary-btn" id="cancel-button" type="button">
+                        <i class="bi bi-x-lg"></i>
+                        إلغاء
+                    </button>
+                    <button class="primary-btn" id="save-session-button" type="button">
+                        <i class="bi bi-check2-circle"></i>
+                        حفظ الجلسة
+                    </button>
+                </div>
+            </header>
+
+            <section class="content-card patient-summary-card" aria-labelledby="patient-summary-title">
+                <div class="section-header">
+                    <h2 id="patient-summary-title">
+                        <i class="bi bi-person-vcard"></i>
+                        بيانات المريض
+                    </h2>
+                </div>
+
+                <div class="alert-message" id="patient-error" role="alert" hidden></div>
+
+                <div class="patient-summary-grid" id="patient-summary" aria-live="polite">
+                    <div class="summary-avatar" aria-hidden="true">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div class="summary-item primary-summary">
+                        <span>المريض</span>
+                        <strong id="patient-name">جاري التحميل...</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>رقم الملف</span>
+                        <strong id="patient-file-number">-</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>رقم المريض</span>
+                        <strong id="patient-id">-</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>الدكتور</span>
+                        <strong id="doctor-name">-</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>التشخيص</span>
+                        <strong id="patient-diagnosis">-</strong>
+                    </div>
+                </div>
+            </section>
+
+            <form class="session-form" id="session-form" novalidate>
+                <section class="content-card" aria-labelledby="session-date-title">
+                    <div class="section-header">
+                        <h2 id="session-date-title">
+                            <i class="bi bi-calendar-event"></i>
+                            تاريخ الجلسة
+                        </h2>
+                    </div>
+
+                    <div class="form-grid one-column">
+                        <div class="input-group">
+                            <label for="session-date">تاريخ الجلسة <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-calendar3"></i>
+                                <input type="date" id="session-date" name="sessionDate" required>
+                            </div>
+                            <small class="field-error" id="session-date-error"></small>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-card" aria-labelledby="session-time-title">
+                    <div class="section-header">
+                        <h2 id="session-time-title">
+                            <i class="bi bi-clock"></i>
+                            وقت الجلسة
+                        </h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="start-time">وقت البدء <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-play-circle"></i>
+                                <input type="time" id="start-time" name="startTime" required>
+                            </div>
+                            <small class="field-help">Session Started</small>
+                            <small class="field-error" id="start-time-error"></small>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="end-time">وقت الانتهاء <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-stop-circle"></i>
+                                <input type="time" id="end-time" name="endTime" required>
+                            </div>
+                            <small class="field-help">Session Ended</small>
+                            <small class="field-error" id="end-time-error"></small>
+                        </div>
+                    </div>
+
+                    <div class="duration-box" id="duration-box" aria-live="polite">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>مدة الجلسة: اختر وقت البدء والانتهاء</span>
+                    </div>
+                </section>
+
+                <section class="content-card" aria-labelledby="equipment-exercises-title">
+                    <div class="section-header">
+                        <h2 id="equipment-exercises-title">
+                            <i class="bi bi-activity"></i>
+                            الأجهزة والتمارين
+                        </h2>
+                    </div>
+
+                    <div class="subsection">
+                        <div class="subsection-title">
+                            <h3>الأجهزة المستخدمة</h3>
+                            <p>أضف الأجهزة التي تم استخدامها في هذه الجلسة فقط.</p>
+                        </div>
+
+                        <div class="inline-add-form">
+                            <div class="input-group grow-field">
+                                <label for="equipment-name">اسم الجهاز</label>
+                                <div class="input-wrapper">
+                                    <i class="bi bi-cpu"></i>
+                                    <input type="text" id="equipment-name" placeholder="اكتب اسم الجهاز">
+                                </div>
+                            </div>
+                            <button class="primary-btn compact-btn" id="add-equipment-button" type="button">
+                                <i class="bi bi-plus-lg"></i>
+                                إضافة جهاز
+                            </button>
+                        </div>
+                        <small class="field-error" id="equipment-error"></small>
+
+                        <div class="chips-list" id="equipment-list" aria-live="polite"></div>
+                    </div>
+
+                    <hr class="section-divider">
+
+                    <div class="subsection">
+                        <div class="subsection-title">
+                            <h3>التمارين</h3>
+                            <p>سجل التمارين التي نفذها المريض خلال هذه الجلسة.</p>
+                        </div>
+
+                        <div class="exercise-entry-grid">
+                            <div class="input-group exercise-name-field">
+                                <label for="exercise-name">اسم التمرين</label>
+                                <div class="input-wrapper">
+                                    <i class="bi bi-person-arms-up"></i>
+                                    <input type="text" id="exercise-name" placeholder="اسم التمرين">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="exercise-sets">المجموعات</label>
+                                <div class="input-wrapper number-wrapper">
+                                    <input type="number" id="exercise-sets" min="1" placeholder="3">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="exercise-repetitions">التكرارات</label>
+                                <div class="input-wrapper number-wrapper">
+                                    <input type="number" id="exercise-repetitions" min="1" placeholder="10">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="exercise-duration">المدة بالدقائق</label>
+                                <div class="input-wrapper number-wrapper">
+                                    <input type="number" id="exercise-duration" min="1" placeholder="10">
+                                </div>
+                            </div>
+                            <div class="input-group exercise-notes-field">
+                                <label for="exercise-notes">ملاحظات التمرين</label>
+                                <div class="input-wrapper textarea-wrapper">
+                                    <textarea id="exercise-notes" rows="2" placeholder="ملاحظات اختيارية"></textarea>
+                                </div>
+                            </div>
+                            <button class="primary-btn compact-btn exercise-add-btn" id="add-exercise-button" type="button">
+                                <i class="bi bi-plus-lg"></i>
+                                إضافة تمرين
+                            </button>
+                        </div>
+                        <small class="field-error" id="exercise-error"></small>
+
+                        <div class="exercise-list" id="exercise-list" aria-live="polite"></div>
+                    </div>
+                </section>
+
+                <section class="content-card" aria-labelledby="doctor-notes-title">
+                    <div class="section-header">
+                        <h2 id="doctor-notes-title">
+                            <i class="bi bi-journal-medical"></i>
+                            ملاحظات الدكتور
+                        </h2>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label for="doctor-notes">ملاحظات الجلسة</label>
+                        <div class="input-wrapper textarea-wrapper large-textarea-wrapper">
+                            <textarea id="doctor-notes" name="notes" rows="7" placeholder="اكتب ملاحظاتك عن حالة المريض خلال الجلسة..."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button class="secondary-btn" id="bottom-cancel-button" type="button">
+                        <i class="bi bi-x-lg"></i>
+                        إلغاء
+                    </button>
+                    <button class="primary-btn" id="bottom-save-session-button" type="submit">
+                        <i class="bi bi-check2-circle"></i>
+                        حفظ الجلسة
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <script type="module" src="session/session.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
